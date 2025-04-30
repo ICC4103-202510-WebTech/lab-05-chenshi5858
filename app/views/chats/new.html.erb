@@ -1,0 +1,27 @@
+<%= form_with(model: @chat, local: true) do |f| %>
+    <% if @chat.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@chat.errors.count, "error") %> prohibited this chat from being saved:</h2>
+        <ul>
+          <% @chat.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="field">
+      <%= f.label :sender_id %>
+      <%= f.select :sender_id, @users.collect { |user| [user.first_name + ' ' + user.last_name, user.id] }, prompt: 'Select a Sender' %>
+    </div>
+  
+    <div class="field">
+      <%= f.label :receiver_id %>
+      <%= f.select :receiver_id, @users.collect { |user| [user.first_name + ' ' + user.last_name, user.id] }, prompt: 'Select a Receiver' %>
+    </div>
+  
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>
+
