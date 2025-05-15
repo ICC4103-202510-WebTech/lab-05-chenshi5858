@@ -25,4 +25,16 @@
   <div class="card mb-4">
     <div class="card-header">
       <h2 class="h5">Messages</h2>
-    </div
+    </div>
+    <ul class="list-group list-group-flush">
+      <% @user.messages.each do |message| %>
+        <li class="list-group-item">
+          <p><strong>Chat ID:</strong> <%= message.chat_id %></p>
+          <p><strong>Message:</strong> <%= message.body %></p>
+          <small class="text-muted"><%= message.created_at.strftime("%d %b %Y %H:%M") %></small>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+</div>
