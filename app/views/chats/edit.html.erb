@@ -1,0 +1,15 @@
+<h1 class="mb-4">Edit Chat</h1>
+
+<%= form_with model: @chat, class: "needs-validation", local: true do |form| %>
+  <div class="mb-3">
+    <%= form.label :sender_id, "Sender", class: "form-label" %>
+    <%= form.collection_select :sender_id, @users, :id, :email, {}, { class: "form-select" } %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :receiver_id, "Receiver", class: "form-label" %>
+    <%= form.collection_select :receiver_id, @users, :id, :email, {}, { class: "form-select" } %>
+  </div>
+
+  <%= form.submit "Update Chat", class: "btn btn-primary" %>
+<% end %>

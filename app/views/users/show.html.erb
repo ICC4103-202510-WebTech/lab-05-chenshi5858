@@ -1,19 +1,28 @@
-<h1>User Details</h1>
-<p>
-  <strong>ID:</strong>
-  <%= @user.id %>
-</p>
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-<p>
-  <strong>First Name:</strong>
-  <%= @user.first_name %>
-</p>
-<p>
-  <strong>Last Name:</strong>
-  <%= @user.last_name %>
-</p>
-<%= link_to 'Back to Users', users_path %>
-<%= link_to "Add New User", new_user_path, class: "btn btn-primary" %>
+<div class="container mt-4">
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h1 class="card-title"><%= @user.first_name %> <%= @user.last_name %></h1>
+      <p class="card-text"><strong>Email:</strong> <%= @user.email %></p>
+      <%= link_to 'Edit user', edit_user_path(@user), class: "btn btn-outline-primary" %>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-header">
+      <h2 class="h5">Chats</h2>
+    </div>
+    <ul class="list-group list-group-flush">
+      <% @user.sent_chats.each do |chat| %>
+        <li class="list-group-item">Chat with <%= chat.receiver.email %></li>
+      <% end %>
+      <% @user.received_chats.each do |chat| %>
+        <li class="list-group-item">Chat with <%= chat.sender.email %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-header">
+      <h2 class="h5">Messages</h2>
+    </div

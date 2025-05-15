@@ -1,11 +1,13 @@
-<h1>Users</h1>
-<table>
-  <thead>
+<h1 class="mb-4">Users</h1>
+
+<table class="table table-bordered table-striped">
+  <thead class="table-dark">
     <tr>
       <th>ID</th>
       <th>Email</th>
       <th>First Name</th>
       <th>Last Name</th>
+      <th>Messages Sent</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -16,9 +18,14 @@
         <td><%= user.email %></td>
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
-        <td><%= link_to('Show', user_path(user)) %></td>
+        <td><%= user.messages.count %></td>
+        <td>
+          <%= link_to('Show', user_path(user), class: 'btn btn-sm btn-primary') %>
+          <%= link_to('Edit', edit_user_path(user), class: 'btn btn-sm btn-outline-secondary ms-2') %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<%= link_to "Add New User", new_user_path, class: "btn btn-primary" %>
+
+<%= link_to "Add New User", new_user_path, class: "btn btn-success" %>

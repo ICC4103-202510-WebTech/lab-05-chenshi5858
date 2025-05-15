@@ -1,32 +1,24 @@
-<%= form_with(model: @user, local: true) do |f| %>
-    <% if @user.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-        <ul>
-          <% @user.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-  
-    <div class="field">
-      <%= f.label :first_name %>
-      <%= f.text_field :first_name %>
+<div class="container mt-4">
+  <%= form_with(model: @user, local: true, html: { class: "needs-validation" }) do |f| %>
+    
+    <div class="mb-3">
+      <%= f.label :first_name, class: "form-label" %>
+      <%= f.text_field :first_name, class: "form-control" %>
     </div>
   
-    <div class="field">
-      <%= f.label :last_name %>
-      <%= f.text_field :last_name %>
+    <div class="mb-3">
+      <%= f.label :last_name, class: "form-label" %>
+      <%= f.text_field :last_name, class: "form-control" %>
     </div>
   
-    <div class="field">
-      <%= f.label :email %>
-      <%= f.email_field :email %>
+    <div class="mb-3">
+      <%= f.label :email, class: "form-label" %>
+      <%= f.email_field :email, class: "form-control" %>
     </div>
   
-    <div class="actions">
-      <%= f.submit %>
+    <div class="mb-3">
+      <%= f.submit "Save User", class: "btn btn-primary" %>
     </div>
-<% end %>
 
+  <% end %>
+</div>
