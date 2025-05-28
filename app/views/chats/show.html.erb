@@ -12,5 +12,13 @@
   <%= @chat.receiver_id %>
 </p>
 
-<%= link_to 'Back to Chats', chats_path %>
-<%= link_to "Add New Chat", new_chat_path, class: "btn btn-primary" %>
+<%= link_to 'Back to Chats', chats_path, class: "btn btn-secondary" %>
+<% if can?(:edit, @chat) %>
+  <%= link_to 'Edit Chat', edit_chat_path(@chat), class: "btn btn-warning" %>
+<% end %>
+<% if can?(:destroy, @chat) %>
+  <%= link_to 'Delete Chat', chat_path(@chat), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+<% end %>
+<% if can?(:create, Chat) %>
+  <%= link_to "Add New Chat", new_chat_path, class: "btn btn-primary" %>
+<% end %>

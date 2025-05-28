@@ -1,31 +1,31 @@
-<h1 class="mb-4">Users</h1>
+<div class="container mt-4">
+  <h1 class="mb-4">Users</h1>
 
-<table class="table table-bordered table-striped">
-  <thead class="table-dark">
-    <tr>
-      <th>ID</th>
-      <th>Email</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Messages Sent</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
+  <table class="table table-bordered table-striped">
+    <thead>
       <tr>
-        <td><%= user.id %></td>
-        <td><%= user.email %></td>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
-        <td><%= user.messages.count %></td>
-        <td>
-          <%= link_to('Show', user_path(user), class: 'btn btn-sm btn-primary') %>
-          <%= link_to('Edit', edit_user_path(user), class: 'btn btn-sm btn-outline-secondary ms-2') %>
-        </td>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= link_to "Add New User", new_user_path, class: "btn btn-success" %>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.first_name %></td>
+          <td><%= user.last_name %></td>
+          <td><%= user.email %></td>
+          <td>
+            <%= link_to 'Show', user_path(user), class: "btn btn-info btn-sm" %>
+            <% if can? :edit, user %>
+              <%= link_to 'Edit', edit_user_path(user), class: "btn btn-warning btn-sm" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

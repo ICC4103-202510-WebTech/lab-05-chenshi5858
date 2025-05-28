@@ -1,18 +1,14 @@
-<%= form_with(model: @chat, local: true) do |f| %>
-  
+<h2>Create New Chat</h2>
+
+<%= form_with model: @chat, local: true do |form| %>
   <div class="mb-3">
-    <%= f.label :sender_id, class: 'form-label' %>
-    <%= f.select :sender_id, @users.collect { |user| [user.first_name + ' ' + user.last_name, user.id] }, prompt: 'Select a Sender', class: 'form-select' %>
+    <%= form.label :receiver_id, "Select Receiver", class: "form-label" %>
+    <%= form.collection_select :receiver_id, User.all, :id, :email, prompt: "Select a user", class: "form-select" %>
   </div>
 
-  <div class="mb-3">
-    <%= f.label :receiver_id, class: 'form-label' %>
-    <%= f.select :receiver_id, @users.collect { |user| [user.first_name + ' ' + user.last_name, user.id] }, prompt: 'Select a Receiver', class: 'form-select' %>
-  </div>
+  <%= form.hidden_field :sender_id, value: current_user.id %>
 
   <div class="mb-3">
-    <%= f.submit "Save Chat", class: "btn btn-primary" %>
+    <%= form.submit "Create Chat", class: "btn btn-primary" %>
   </div>
-
 <% end %>
-

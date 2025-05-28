@@ -16,12 +16,15 @@
         <td><%= chat.sender_id %></td>
         <td><%= chat.receiver_id %></td>
         <td>
-          <%= link_to 'Show', chat_path(chat), class: "btn btn-sm btn-info me-1" %>
-          <%= link_to 'Edit', edit_chat_path(chat), class: "btn btn-sm btn-warning" %>
+          <%= link_to 'Show', chat_path(chat), class: "btn btn-sm btn-info me-1" if can?(:read, chat) %>
+          <%= link_to 'Edit', edit_chat_path(chat), class: "btn btn-sm btn-warning me-1" if can?(:edit, chat) %>
+          <%= link_to 'Delete', chat_path(chat), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" if can?(:destroy, chat) %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to "Add New Chat", new_chat_path, class: "btn btn-primary mt-3" %>
+<% if can?(:create, Chat) %>
+  <%= link_to "Add New Chat", new_chat_path, class: "btn btn-primary mt-3" %>
+<% end %>

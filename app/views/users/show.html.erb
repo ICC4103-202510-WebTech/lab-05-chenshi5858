@@ -1,10 +1,11 @@
 <div class="container mt-4">
-
   <div class="card mb-4">
     <div class="card-body">
       <h1 class="card-title"><%= @user.first_name %> <%= @user.last_name %></h1>
       <p class="card-text"><strong>Email:</strong> <%= @user.email %></p>
-      <%= link_to 'Edit user', edit_user_path(@user), class: "btn btn-outline-primary" %>
+      <% if can? :edit, @user %>
+        <%= link_to 'Edit user', edit_user_path(@user), class: "btn btn-outline-primary" %>
+      <% end %>
     </div>
   </div>
 
@@ -36,5 +37,4 @@
       <% end %>
     </ul>
   </div>
-
 </div>
