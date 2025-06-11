@@ -4,8 +4,7 @@
   <thead class="table-dark">
     <tr>
       <th>ID</th>
-      <th>Sender ID</th>
-      <th>Receiver ID</th>
+      <th>Other Participant</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -13,8 +12,7 @@
     <% @chats.each do |chat| %>
       <tr>
         <td><%= chat.id %></td>
-        <td><%= chat.sender_id %></td>
-        <td><%= chat.receiver_id %></td>
+        <td><%= chat.other_participant(current_user).full_name %></td>
         <td>
           <%= link_to 'Show', chat_path(chat), class: "btn btn-sm btn-info me-1" if can?(:read, chat) %>
           <%= link_to 'Edit', edit_chat_path(chat), class: "btn btn-sm btn-warning me-1" if can?(:edit, chat) %>

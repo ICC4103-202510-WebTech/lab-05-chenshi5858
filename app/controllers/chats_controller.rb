@@ -3,8 +3,7 @@ class ChatsController < ApplicationController
   authorize_resource
 
   def index
-    # Mostrar solo los chats en los que el usuario actual está involucrado
-    @chats = Chat.where("sender_id = ? OR receiver_id = ?", current_user.id, current_user.id)
+    @chats = Chat.for_user(current_user)
   end
 
   def show
@@ -14,7 +13,7 @@ class ChatsController < ApplicationController
 
   def new
     @chat = Chat.new
-    @users = User.where.not(id: current_user.id) # Mostrar solo usuarios distintos del actual
+    @users = User.where.not(id: current_user.id)
   end
 
   def edit
@@ -37,7 +36,7 @@ class ChatsController < ApplicationController
 
   def create
     @chat = Chat.new(chat_params)
-    @chat.sender_id = current_user.id # Asegura que el sender siempre sea el usuario logueado
+    @chat.sender_id = current_user.id
 
     if @chat.save
       redirect_to @chat, notice: "Chat was successfully created."
