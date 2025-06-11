@@ -27,15 +27,16 @@
       <a class="navbar-brand" href="/">Whats New</a>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item"><%= link_to 'Users', users_path, class: 'nav-link' %></li>
+          <% if user_signed_in? && current_user.admin? %>
+            <li class="nav-item"><%= link_to 'Users', users_path, class: 'nav-link' %></li>
+          <% end %>
           
-          <li class="nav-item"><%= link_to 'Messages', messages_path, class: 'nav-link' %></li>
+          
         </ul>
         <ul class="navbar-nav ml-auto">
           <% if user_signed_in? %>
-            <li class="nav-item">
-              <%= link_to 'My Inbox', chats_path, class: 'nav-link' %>
-            </li>
+            <li class="nav-item"><%= link_to 'My Inbox', chats_path, class: 'nav-link' %></li>
+            <li class="nav-item"><%= link_to 'Messages', messages_path, class: 'nav-link' %></li>
             <li class="nav-item">
               <%= button_to 'Cerrar sesión', destroy_user_session_path, method: :delete, class: 'nav-link btn btn-link' %>
             </li>

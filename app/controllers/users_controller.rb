@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   authorize_resource
   def index
-    @users = User.all
+    @users = User.all if current_user.admin?
   end
 
   def show

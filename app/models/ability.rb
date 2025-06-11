@@ -29,8 +29,9 @@ class Ability
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/blob/develop/docs/define_check_abilities.md
     return unless user.present?
-    can :read, User
-    cannot [:create, :update, :destroy], User
+
+    can :read, User, id: user.id
+    cannot :manage, User
     can :read, Chat, sender_id: user.id
     can :read, Chat, receiver_id: user.id
     can :create, Chat
@@ -38,5 +39,7 @@ class Ability
     can :read, Message, chat: { receiver_id: user.id }
     can :create, Message
     can [:update, :destroy], Message, user_id: user.id
+    return unless user.admin?
+    can :manage, :all
   end
 end

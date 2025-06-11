@@ -32,6 +32,10 @@
   </div>
 
   <div class="mb-3">
+    <%= f.label :admin, "Register as", class: "form-label" %>
+    <%= f.select :admin, [["Regular User", false], ["Admin", true]], {}, class: "form-select" %>
+  </div>
+  <div class="mb-3">
     <%= f.submit "Sign up", class: "btn btn-primary" %>
   </div>
 <% end %>
